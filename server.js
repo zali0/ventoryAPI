@@ -45,17 +45,6 @@ app.post('/signin', (req,res) => {
         }
     })
     .catch(error => res.json("error"))
-    // db('users').where({
-    //     email: req.body.email,
-    //   }).select('*')
-    //   .then(user => {
-    //       if(user.length) {
-    //           console.log(user)
-    //           res.json("success");
-    //       }
-    //       else
-    //         res.json("error")
-    //   })
 })
 
 app.post('/register', (req,res) => {
@@ -73,7 +62,6 @@ app.post('/register', (req,res) => {
             db('users')
             .returning('*')
             .insert({
-                // id: id,
                 email: loginEmail[0],
                 name: req.body.name,
                 joined: new Date()
@@ -164,9 +152,6 @@ app.get('/getRecord/:id', (req,res) => {
         console.log(err)
     })
 })
-// data data.length
-// [ { date: '2012-06-07', produced: 50, sold: 25, stock: 25 } 
-//  { date: '2012-06-07', produced: 50, sold: 25, stock: 25 } ]
 
 app.post('/updateRecord/:id', (req,res) => {
     console.log("UPDATE RECORD API");
@@ -196,18 +181,7 @@ app.post('/updateRecord/:id', (req,res) => {
         })
         .catch(error => res.json(error));
     });
-            // products[i].stock = Number(stock);
-            // products[i].totalProduced += Number(produced);
-            // products[i].totalSold += Number(sold);
-        
 })
-// let totalProduced;
-// let totalSold;
-/*
-    signin check if the user has entererd right credentials
-    data => if the credentials are right then send the whole data to the homepage
-    for the product page, load data for the necassary proudtc
-*/
-app.listen(3003);
+app.listen(process.env.PORT || 3003);
 
 
