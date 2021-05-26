@@ -26,7 +26,7 @@ app.use((req, res, next) => {
     next();
   });
 
-app.post('/signin', (req,res) => {
+app.get('/signin', (req,res) => {
     console.log(req.body.password)
     db.select('*').from('login')
     .where('email', '=', req.body.email)
