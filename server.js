@@ -50,7 +50,9 @@ app.post('/signin', (req,res) => {
 app.post('/register', (req,res) => {
     const saltRounds = 10;
     const hash = bcrypt.hashSync(req.body.password, saltRounds);
-    console.log(req.body.email)
+    console.log("The name that has been given for registration: ", req.body.name)
+    console.log("The email that has been given for registration: ", req.body.email)
+    console.log("The password that has been given for registration: ", req.body.password)
     db.transaction (trx => {
         trx.insert({
             hash: hash,
@@ -58,6 +60,7 @@ app.post('/register', (req,res) => {
         }).into('login')
         .returning('email')
         .then((loginEmail) => {
+            console.log("Inside the user table adding block")
             console.log(loginEmail[0]);
             db('users')
             .returning('*')
