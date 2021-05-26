@@ -78,6 +78,11 @@ app.post('/register', (req,res) => {
 })
 
 app.post('/addCategory', (req,res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
     console.log(req)
             db('categories')
             .returning('*')
@@ -93,7 +98,13 @@ app.post('/addCategory', (req,res) => {
 
 app.post('/addProduct', (req,res) => {
     const { companyid, name, category, dimensions, unit, stock} = req.body;
-    db('categories').returning().where('name', category).then(data=> {
+    console.log("request.body.name =" ,name);
+    console.log("request.body.category =" ,category);
+    console.log("request.body.dimensions =" ,dimensions);
+    console.log("request.body.companyid =" ,companyid);
+    console.log("request.body.unit =" ,unit);
+    console.log("request.body.stock =" ,stock);
+    db('categories').returning("*").where('name', category).then(data=> {
         db('products')
         .returning("*")
         .insert({
@@ -108,6 +119,7 @@ app.post('/addProduct', (req,res) => {
             totalsold: 0
         })
         .then(products => {
+            console.log("Products")
             db.schema.createTable(`_${products[products.length-1].id}`, (table) => {
                 table.string('date')
                 table.integer('produced')
