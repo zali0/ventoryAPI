@@ -97,6 +97,11 @@ app.post('/addCategory', (req,res) => {
 
 
 app.post('/addProduct', (req,res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
     const { companyid, name, category, dimensions, unit, stock} = req.body;
     console.log("request.body.name =" ,name);
     console.log("request.body.category =" ,category);
