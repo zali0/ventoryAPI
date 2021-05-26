@@ -111,7 +111,7 @@ app.post('/addProduct', (req,res) => {
     console.log("request.body.stock =" ,stock);
     db('categories').returning("*").where('name', category).then(data=> {
         console.log("DATA returned from categories")
-        console.log("image: ",data[0].image)
+        console.log("image: ",data)
         db('products')
         .returning("*")
         .insert({
