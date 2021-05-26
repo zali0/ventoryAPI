@@ -131,10 +131,10 @@ app.post('/addProduct', (req,res) => {
                 table.integer('stock')
             })
             .then(() =>{})
-            .catch(err => console.log(err))
+            .catch(err => console.log("Couldn't create specific table",err))
         })
-        .catch(error => res.json(error));
-    }).catch(err => console.log(err))
+        .catch(error => res.json("failed adding to products table", error));
+    }).catch(err => console.log("couldn't find category stuff", err))
     
 })
 
