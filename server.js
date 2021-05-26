@@ -131,9 +131,10 @@ app.post('/addProduct', (req,res) => {
                 table.integer('stock')
             })
             .then(() =>{})
+            .catch(err => console.log(err))
         })
         .catch(error => res.json(error));
-    })
+    }).catch(err => console.log(err))
     
 })
 
