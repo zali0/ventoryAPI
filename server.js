@@ -105,6 +105,8 @@ app.post('/addProduct', (req,res) => {
     console.log("request.body.unit =" ,unit);
     console.log("request.body.stock =" ,stock);
     db('categories').returning("*").where('name', category).then(data=> {
+        console.log("DATA returned from categories")
+        console.log("image: ",data[0].image)
         db('products')
         .returning("*")
         .insert({
@@ -120,6 +122,7 @@ app.post('/addProduct', (req,res) => {
         })
         .then(products => {
             console.log("Products")
+            console.log("Creating table: ", products[products.length-1].id)
             db.schema.createTable(`_${products[products.length-1].id}`, (table) => {
                 table.string('date')
                 table.integer('produced')
