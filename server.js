@@ -115,7 +115,6 @@ app.post('/addProduct', (req,res) => {
         db('products')
         .returning("*")
         .insert({
-            id: 2,
             companyid: companyid,
             name: name,
             category,
