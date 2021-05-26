@@ -65,7 +65,6 @@ app.post('/register', (req,res) => {
             db('users')
             .returning('*')
             .insert({
-                id: 1,
                 email: loginEmail[0],
                 name: req.body.name,
                 joined: new Date()
