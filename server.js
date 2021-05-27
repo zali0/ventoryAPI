@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 
 app.post("/signin", (req, res) => {
   if (req.body.email === "" || req.body.password === "")
-    res.json("Please fill in the input boxes!");
+    res.json("error");
   console.log(req.body.password);
   db.select("*")
     .from("login")
@@ -53,7 +53,7 @@ app.post("/signin", (req, res) => {
 
 app.post("/register", (req, res) => {
   if (req.body.name === "" || req.body.email === "" || req.body.password === "")
-    res.json("Please fill in the input boxes!");
+    res.json("error");
   const saltRounds = 10;
   const hash = bcrypt.hashSync(req.body.password, saltRounds);
   console.log("The name that has been given for registration: ", req.body.name);
@@ -93,7 +93,7 @@ app.post("/register", (req, res) => {
 
 app.post("/addCategory", (req, res) => {
   if (req.body.name === "" || req.body.image === "")
-    res.json("Please fill in the input boxes!");
+    res.json("error");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -120,7 +120,7 @@ app.post("/addProduct", (req, res) => {
     req.body.unit === "" ||
     req.body.stock === ""
   )
-    res.json("Please fill in the input boxes!");
+    res.json("error");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -220,7 +220,7 @@ app.post("/updateRecord/:id", (req, res) => {
         req.body.produced === "" ||
         req.body.sold === "" 
       )
-        res.json("Please fill in the input boxes!");
+        res.json("error");
   console.log("UPDATE RECORD API");
   let id = req.params.id;
   db.select("*")
